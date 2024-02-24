@@ -12,14 +12,13 @@ menambahkan menu 'profile' di daftar menu untuk bisa mengarah ke halaman profile
 - ![image](https://github.com/nisrinawafaz/ecommerce_app_flutter/assets/89191583/4008a14d-7fa2-4d9f-94f1-af8daf259d0b)
 
 - menambahkan dekorasi dibawah harga ketika barang tersebut terkena mouse (hover) :
-- ![image](https://github.com/nisrinawafaz/ecommerce_app_flutter/assets/89191583/f445d251-8111-4fa7-b4a6-a78c255f3d21)
+- ![image](https://github.com/nisrinawafaz/ecommerce_app_flutter/assets/89191583/88aa6490-1baa-43a9-88a9-5e30514651ae)
 
 - file product_card.dart :
 - ![image](https://github.com/nisrinawafaz/ecommerce_app_flutter/assets/89191583/cecd9743-a80d-4514-9f64-0a47bf518078)
 
 - file product_card.dart  untuk menentukan hover atau tidak :
-- ![image](https://github.com/nisrinawafaz/ecommerce_app_flutter/assets/89191583/88aa6490-1baa-43a9-88a9-5e30514651ae)
-
+- ![image](https://github.com/nisrinawafaz/ecommerce_app_flutter/assets/89191583/2b4f4fc3-2afd-4a91-8fd6-14196cd76e7f)
 
 - file product_card.dart fungsi mengubah state (menjadi stateful karena ada perubahan data):
 - ![image](https://github.com/nisrinawafaz/ecommerce_app_flutter/assets/89191583/67afdea7-309c-4264-8ea6-3d54d64178a5)
