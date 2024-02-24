@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'supplemental/asymmetric_view.dart';

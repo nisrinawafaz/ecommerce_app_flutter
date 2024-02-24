@@ -15,9 +15,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../colors.dart';
 import '../model/product.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   const ProductCard(
       {this.imageAspectRatio = 33 / 49, required this.product, Key? key})
       : assert(imageAspectRatio > 0),
@@ -29,48 +30,83 @@ class ProductCard extends StatelessWidget {
   static const kTextBoxHeight = 65.0;
 
   @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  static bool _isHovering = false;
+
+  void _onHoverChanged(bool isHovering) {
+    setState(() {
+      _isHovering = isHovering;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final NumberFormat formatter = NumberFormat.simpleCurrency(
         decimalDigits: 0, locale: Localizations.localeOf(context).toString());
     final ThemeData theme = Theme.of(context);
 
     final imageWidget = Image.asset(
-      product.assetName,
-      package: product.assetPackage,
+      widget.product.assetName,
+      package: widget.product.assetPackage,
       fit: BoxFit.cover,
     );
 
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        AspectRatio(
-          aspectRatio: imageAspectRatio,
-          child: imageWidget,
-        ),
-        SizedBox(
-          height: kTextBoxHeight * MediaQuery.of(context).textScaleFactor,
-          width: 121.0,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                product.name,
-                style: theme.textTheme.labelLarge,
-                softWrap: false,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
+    return MouseRegion(
+        onEnter: (_) {
+          _onHoverChanged(true);
+        },
+        onExit: (_) {
+          _onHoverChanged(false);
+        },
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            AspectRatio(
+              aspectRatio: widget.imageAspectRatio,
+              child: imageWidget,
+            ),
+            SizedBox(
+              height: ProductCard.kTextBoxHeight *
+                  MediaQuery.of(context).textScaleFactor,
+              width: 121.0,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    widget.product.name,
+                    style: theme.textTheme.labelLarge,
+                    softWrap: false,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  const SizedBox(height: 4.0),
+                  Column(
+                    children: <Widget>[
+                      const SizedBox(height: 5.0),
+                      Text(
+                        formatter.format(widget.product.price),
+                        style: theme.textTheme.bodySmall,
+                      ),
+                      const SizedBox(height: 8.0),
+                      Visibility(
+                        visible: _isHovering,
+                        child: Container(
+                          width: 70.0,
+                          height: 2.0,
+                          color: kShrinePink400,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              const SizedBox(height: 4.0),
-              Text(
-                formatter.format(product.price),
-                style: theme.textTheme.bodySmall,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+            ),
+          ],
+        ));
   }
 }

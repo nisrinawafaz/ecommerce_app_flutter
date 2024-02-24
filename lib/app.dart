@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'profile.dart';
 import 'supplemental/cut_corners_border.dart';
 import 'colors.dart';
 import 'home.dart';
@@ -37,6 +38,7 @@ class _ShrineAppState extends State<ShrineApp> {
       _currentCategory = category;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,11 +47,11 @@ class _ShrineAppState extends State<ShrineApp> {
       routes: {
         '/login': (BuildContext context) => const LoginPage(),
         // TODO: Change to a Backdrop with a HomePage frontLayer (104)
-'/': (BuildContext context) => Backdrop(
+        '/': (BuildContext context) => Backdrop(
               // TODO: Make currentCategory field take _currentCategory (104)
               currentCategory: _currentCategory,
               // TODO: Pass _currentCategory for frontLayer (104)
-frontLayer: HomePage(category: _currentCategory),
+              frontLayer: _currentCategory == Category.profile ? ProfilePage() : HomePage(category: _currentCategory),
               // TODO: Change backLayer field value to CategoryMenuPage (104)
               backLayer: CategoryMenuPage(
                 currentCategory: _currentCategory,
@@ -62,7 +64,7 @@ frontLayer: HomePage(category: _currentCategory),
         // TODO: Pass _currentCategory for frontLayer (104)
         // TODO: Change backLayer field value to CategoryMenuPage (104)
       },
-        // TODO: Customize the theme (103)
+      // TODO: Customize the theme (103)
       theme: _kShrineTheme, // New code
     );
   }
@@ -102,6 +104,7 @@ ThemeData _buildShrineTheme() {
     ),
   );
 }
+
 // TODO: Build a Shrine Text Theme (103)
 TextTheme _buildShrineTextTheme(TextTheme base) {
   return base
